@@ -1,5 +1,5 @@
 '''
-    Altspell  Refaurmd Lojikl Inglish plugin for altspell.
+    Altspell-Refaurmd-Lojikl-Inglish  Refaurmd Lojikl Inglish plugin for altspell.
     Copyright (C) 2024  Nicholas Johnson
 
     This program is free software: you can redistribute it and/or modify

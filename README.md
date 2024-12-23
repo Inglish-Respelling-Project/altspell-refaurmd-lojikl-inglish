@@ -1,3 +1,3 @@
-# Altspell-Soundspel
+# Altspell Refaurmd Lojikl Inglish
 
-Soundspel plugin for altspell.
+Refaurmd Lojikl Inglish plugin for altspell.
