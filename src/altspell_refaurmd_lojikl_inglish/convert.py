@@ -34,7 +34,11 @@ class FwdDictionary:
                 tradspell = row[0]
                 rli = row[1]
 
-                self.dict[tradspell] = rli
+                pos = row[3]
+                if pos == '':
+                    pos = None
+
+                self.dict[(tradspell, pos)] = rli
 
 class RevDictionary:
     def __init__(self):
@@ -71,10 +75,29 @@ class FwdConverter(Converter):
         for token in doc:
             token_lower = token.text.lower()
 
-            if token_lower in self._dict.dict:
-                _process_lowercase_key(token, token_lower, self._dict, out_tokens)
-            elif token.text in self._dict.dict:
-                out_tokens.append(self._dict.dict[token.text])
+            pos = token.pos_
+            match pos:
+                case 'NOUN':
+                    pos = 'n'
+                case 'VERB':
+                    pos = 'v'
+                case 'ADJ':
+                    pos = 'adj'
+                case 'ADV':
+                    pos = 'adv'
+                case 'INTJ':
+                    pos = 'interj'
+                case _:
+                    pos = None
+
+            if (token_lower, None) in self._dict.dict:
+                _process_lowercase_key(token, (token_lower, None), self._dict, out_tokens)
+            elif (token_lower, pos) in self._dict.dict:
+                _process_lowercase_key(token, (token_lower, pos), self._dict, out_tokens)
+            elif (token.text, None) in self._dict.dict:
+                out_tokens.append(self._dict.dict[(token.text, None)])
+            elif (token.text, pos) in self._dict.dict:
+                out_tokens.append(self._dict.dict[(token.text, pos)])
             else:
                 out_tokens.append(token.text)
 
