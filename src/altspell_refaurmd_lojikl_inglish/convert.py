@@ -34,7 +34,7 @@ class FwdDictionary:
                 tradspell = row[0]
                 rli = row[1]
 
-                pos = row[3]
+                pos = row[2]
                 if pos == '':
                     pos = None
 
